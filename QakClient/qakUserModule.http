@@ -1,0 +1,32 @@
+###
+@hostname = localhost
+@port = 9000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+
+###
+@baseUrl = http://localhost:9000
+
+###
+# @name getTokenReq
+@username = sm1
+POST {{baseUrl}}/rwx/userId HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "username": "{{username}}",
+    "code": "asdfsfsd",
+    "email": "x@x.com",
+    "avatar": "http://avatar"
+}
+
+### 
+# @name queryUserReq
+@authToken = {{getTokenReq.response.headers.Authorization}}
+GET {{baseUrl}}/u/users 
+    ?page=1
+    &pageSize=2
+    &phoneNumber=507 HTTP/1.1
+Authorization: {{authToken}}
+

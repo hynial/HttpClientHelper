@@ -1,0 +1,30 @@
+###
+@hostname = localhost
+@port = 8888
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+
+###
+@baseUrl = http://localhost:8888/api
+
+# @name login
+GET {{baseUrl}}/diy/ HTTP/1.1
+Content-Type: text/plain
+
+###
+@username = sm1
+@authToken = {{login.response.headers.Authorization}}
+# @prompt email x@x.com
+POST http://{{host}}/api/login HTTP/1.1
+content-type: {{contentType}}
+authorization: {{authToken}}
+
+{
+    "username": "{{username}}",
+    "password": "asdfsfsd",
+    "email": "{{email}}"
+}
+
+
+
