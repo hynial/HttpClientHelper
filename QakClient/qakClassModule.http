@@ -1,0 +1,48 @@
+###
+@hostname = localhost
+@port = 9000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+
+###
+@baseUrl = http://localhost:9991
+
+###
+# @name getTokenReq
+@username = sm1
+POST {{baseUrl}}/rwx/userId HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "username": "{{username}}",
+    "code": "asdfsfsd",
+    "email": "x@x.com",
+    "avatar": "http://avatar",
+    "debug": "true"
+}
+
+### 
+# @name createClass
+@authToken = {{getTokenReq.response.headers.Authorization}}
+POST {{baseUrl}}/cls/add HTTP/1.1
+Authorization: {{authToken}}
+content-type: {{contentType}}
+
+{
+    "name": "本班3",
+    "description": "benBan",
+    "avatar": "https://avatar",
+    "headTeacher": 10,
+    "changeNickname": false,
+    "joinFresh": true,
+    "permitInvite": true,
+    "dismissStatus": false
+}
+
+### 
+# @name getUserClass
+@authToken = {{getTokenReq.response.headers.Authorization}}
+GET {{baseUrl}}/userCls/list HTTP/1.1
+Authorization: {{authToken}}
+

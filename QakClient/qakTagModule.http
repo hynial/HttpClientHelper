@@ -23,10 +23,20 @@ content-type: {{contentType}}
 }
 
 ### 
-# @name queryUserReq
+# @name createTag
 @authToken = {{getTokenReq.response.headers.Authorization}}
-GET {{baseUrl}}/u/users 
-    ?page=1
-    &pageSize=2
-    &phoneNumber=507 HTTP/1.1
+POST {{baseUrl}}/tag/add HTTP/1.1
 Authorization: {{authToken}}
+content-type: {{contentType}}
+
+{
+    "name": "http"
+}
+
+
+### 
+# @name getUserTag
+@authToken = {{getTokenReq.response.headers.Authorization}}
+GET {{baseUrl}}/userTag/list HTTP/1.1
+Authorization: {{authToken}}
+
